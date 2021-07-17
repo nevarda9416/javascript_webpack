@@ -16,7 +16,15 @@ module.exports = {
     mode: 'production',
     entry: './src/index.js', // File đầu vào
     output: { // File đầu ra
-        filename: 'main.js', // Tên file đầu ra
+        filename: 'bundle.js', // Tên file đầu ra
         path: path.resolve(__dirname, 'dist') // Folder nơi chứa file đầu ra
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            }
+        ]
     }
 }
