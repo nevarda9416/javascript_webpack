@@ -14,20 +14,25 @@ module.exports = {
      * - chậm hơn
      * - tối ưu hóa code tốt hơn ở kết quả đầu ra. Kết quả là file javascript đầu ra có kích thước nhỏ hơn
      */
-    mode: 'production',
+    mode: 'development',
     entry: {
         index: './src/index.js',
         print: './src/print.js'
     }, // File đầu vào
+    devtool: 'inline-source-map',
+    devServer: {
+      contentBase: './dist',
+    },
     plugins: [
       new HtmlWebpackPlugin({
-          title: 'Output Management'
+          title: 'Development'
       })
     ],
     output: { // File đầu ra
         filename: '[name].bundle.js', // Tên file đầu ra
         path: path.resolve(__dirname, 'dist'), // Folder nơi chứa file đầu ra
         clean: true,
+        publicPath: '/'
     },
     module: {
         rules: [
