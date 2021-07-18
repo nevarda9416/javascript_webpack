@@ -28,35 +28,25 @@ module.exports = {
     },
     plugins: [
       new HtmlWebpackPlugin({
-          title: 'Development'
+          title: 'Caching'
       })
     ],
     output: { // File đầu ra
-        filename: '[name].bundle.js', // Tên file đầu ra
+        filename: '[name].[contenthash].js', // Tên file đầu ra
         path: path.resolve(__dirname, 'dist'), // Folder nơi chứa file đầu ra
+        clean: true,
     },
-    module: {
-        rules: [
-            {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource'
-            },
-            {
-                test: /\.(csv|tsv)$/i,
-                use: ['csv-loader'],
-            },
-            {
-                test: /\.xml$/i,
-                use: ['xml-loader'],
-            },
-        ]
+    optimization: {
+        moduleIds: 'deterministic',
+        runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                }
+            }
+        }
     }
 }
