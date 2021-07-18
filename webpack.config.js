@@ -20,10 +20,6 @@ module.exports = {
             import: './src/index.js',
             dependOn: 'shared',
         },
-        another: {
-            import: './src/another-module.js',
-            dependOn: 'shared',
-        },
         shared: 'lodash',
     }, // File đầu vào
     devtool: 'inline-source-map',
@@ -38,9 +34,6 @@ module.exports = {
     output: { // File đầu ra
         filename: '[name].bundle.js', // Tên file đầu ra
         path: path.resolve(__dirname, 'dist'), // Folder nơi chứa file đầu ra
-    },
-    optimization: {
-        splitChunks: { chunks: 'all' }
     },
     module: {
         rules: [
