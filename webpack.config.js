@@ -1,7 +1,5 @@
 const path = require('path');
-const toml = require('toml');
-const yaml = require('yamljs');
-const json5 = require('json5');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     /**
      * Chế độ development (thực hiện một số ưu tiên riêng)
@@ -17,10 +15,19 @@ module.exports = {
      * - tối ưu hóa code tốt hơn ở kết quả đầu ra. Kết quả là file javascript đầu ra có kích thước nhỏ hơn
      */
     mode: 'production',
-    entry: './src/index.js', // File đầu vào
+    entry: {
+        index: './src/index.js',
+        print: './src/print.js'
+    }, // File đầu vào
+    plugins: [
+      new HtmlWebpackPlugin({
+          title: 'Output Management'
+      })
+    ],
     output: { // File đầu ra
-        filename: 'bundle.js', // Tên file đầu ra
-        path: path.resolve(__dirname, 'dist') // Folder nơi chứa file đầu ra
+        filename: '[name].bundle.js', // Tên file đầu ra
+        path: path.resolve(__dirname, 'dist'), // Folder nơi chứa file đầu ra
+        clean: true,
     },
     module: {
         rules: [
@@ -43,27 +50,6 @@ module.exports = {
             {
                 test: /\.xml$/i,
                 use: ['xml-loader'],
-            },
-            {
-                test: /\.toml$/i,
-                type: 'json',
-                parser: {
-                    parse: toml.parse
-                }
-            },
-            {
-                test: /\.yaml$/i,
-                type: 'json',
-                parser: {
-                    parse: yaml.parse
-                }
-            },
-            {
-                test: /\.json5$/i,
-                type: 'json',
-                parser: {
-                    parse: json5.parse
-                }
             },
         ]
     }
