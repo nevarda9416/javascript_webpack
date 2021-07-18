@@ -1,4 +1,12 @@
+@font-face {
+    font-family: Montserrat;
+    src: url("./montserrat.woff2") format('woff2'),
+    url("./montserrat.woff") format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
 .hello {
     color: red;
+    font-family: Montserrat;
     background: url("./icon.png") no-repeat;
 }
