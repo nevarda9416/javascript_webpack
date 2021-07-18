@@ -17,7 +17,8 @@ module.exports = {
     mode: 'development',
     entry: {
         index: './src/index.js',
-        print: './src/print.js'
+        print: './src/print.js',
+        another: './src/another-module.js'
     }, // File đầu vào
     devtool: 'inline-source-map',
     devServer: {
@@ -31,8 +32,6 @@ module.exports = {
     output: { // File đầu ra
         filename: '[name].bundle.js', // Tên file đầu ra
         path: path.resolve(__dirname, 'dist'), // Folder nơi chứa file đầu ra
-        clean: true,
-        publicPath: '/'
     },
     module: {
         rules: [
